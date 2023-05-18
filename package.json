@@ -1,6 +1,6 @@
 {
-  "name": "mesto-react-auth",
-  "homepage": "http://Bababum95.github.io/mesto-react-auth",
+  "name": "react-mesto-auth",
+  "homepage": "http://Bababum95.github.io/react-mesto-auth",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
