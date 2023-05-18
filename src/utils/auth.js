@@ -8,19 +8,6 @@ export const register = (formData) => {
         },
         body: JSON.stringify(formData)
     })
-        .then((response) => {
-            try {
-                if (response.status === 200) {
-                    return response.json();
-                }
-            } catch (e) {
-                return (e)
-            }
-        })
-        .then((res) => {
-            return res;
-        })
-        .catch((err) => console.log(err));
 };
 export const authorize = (formData) => {
     return fetch(`${BASE_URL}/signin`, {
@@ -30,14 +17,6 @@ export const authorize = (formData) => {
         },
         body: JSON.stringify(formData)
     })
-        .then((response => response.json()))
-        .then((data) => {
-            if (data) {
-                localStorage.setItem('token', data.token);
-                return data;
-            }
-        })
-        .catch(err => console.log(err))
 };
 export const checkToken = (token) => {
     return fetch(`${BASE_URL}/users/me`, {

@@ -14,6 +14,8 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import ImagePopup from './ImagePopup';
+import InfoTooltip from './InfoTooltip';
+
 
 function App() {
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ function App() {
   const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
   const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
   const [selectedCard, setSelectedCard] = useState({});
+  const [info, setInfo] = useState(null);
   const [cards, setCards] = useState([]);
   const [email, setEmail] = useState(null)
   const [currentUser, setCurrentUser] = useState({
@@ -47,21 +50,30 @@ function App() {
       return;
     }
     authorize(formValue)
+      .then((response => response.json()))
       .then((data) => {
-        if (data.token) {
-          setLoggedIn(true);
-          setEmail(formValue.email)
-          navigate('/', { replace: true });
+        try {
+          if (data.token) {
+            localStorage.setItem('token', data.token);
+            setLoggedIn(true);
+            setEmail(formValue.email)
+            navigate('/', { replace: true });
+          } else {
+            setInfo('Что-то пошло не так!Попробуйте ещё раз.')
+          }
+        } catch (err) {
+          console.log(err)
         }
       })
-      .catch(err => console.log(err));
   };
   const closeAllPopups = () => {
     setEditProfilePopupOpen(false)
     setAddPlacePopupOpen(false)
     setEditAvatarPopupOpen(false)
+    setInfo(null)
     setSelectedCard({})
   };
+
   useEffect(() => {
     handleTokenCheck();
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -139,7 +151,7 @@ function App() {
             onCardLike={handleCardLike}
             onCardDelete={handleCardDelete}
           />} />
-        <Route path="/register" element={<Register />} />
+        <Route path="/register" element={<Register setInfo={setInfo} />} />
         <Route path="/login" element={<Login handleLogin={handleLogin} />} />
       </Routes >
       <Footer />
@@ -149,6 +161,7 @@ function App() {
       <PopupWithForm name="confirmation" title="Вы уверены?" button="Да">
       </PopupWithForm>
       <ImagePopup card={selectedCard} onClose={closeAllPopups} />
+      <InfoTooltip title={info} onClose={closeAllPopups} />
     </CurrentUserContext.Provider>
   );
 };
