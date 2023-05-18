@@ -1,0 +1,46 @@
+.header__button-menu {
+    display: none;
+}
+
+@media screen and (max-width:940px) {
+    .header__button-menu {
+        display: block;
+        position: relative;
+        border: none;
+        transition: all 0.5s ease-in-out;
+    }
+
+    .header__button-menu,
+    .header__button-menu::before,
+    .header__button-menu::after {
+        background-color: #FFF;
+        width: 24px;
+        height: 3px;
+    }
+
+    .header__button-menu::after,
+    .header__button-menu::before {
+        content: '';
+        position: absolute;
+        left: 0;
+    }
+
+    .header__button-menu::after {
+        bottom: -10px;
+    }
+
+    .header__button-menu::before {
+        top: -10px;
+    }
+
+    .header__button-menu_active {
+        transform: rotate(-45deg);
+    }
+
+    .header__button-menu_active::after,
+    .header__button-menu_active::before {
+        transform: rotate(90deg);
+        top: 0;
+        bottom: 0;
+    }
+}
