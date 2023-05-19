@@ -1,25 +1,18 @@
-import { useState } from 'react'
+import { useForm } from '../hooks/useForm'
 
 function FormAuth({ title, buttonName, handleSubmit, children }) {
-    const [formValue, setFormValue] = useState({
+    const {values, handleChange} = useForm({
         email: '',
         password: ''
     })
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setFormValue({
-            ...formValue,
-            [name]: value
-        });
-    }
     return (
         <div className="auth">
             <h2 className="auth__title">{title}</h2>
-            <form className="auth__form" onSubmit={(e) => handleSubmit(e, formValue)} >
+            <form className="auth__form" onSubmit={(e) => handleSubmit(e, values)} >
                 <input className="auth__input" placeholder="Email" type="email" name='email'
-                    value={formValue.email} onChange={handleChange} />
+                    value={values.email} onChange={handleChange} />
                 <input className="auth__input" placeholder="Пароль" type="password" name='password'
-                    value={formValue.password} onChange={handleChange} />
+                    value={values.password} onChange={handleChange} />
                 <button className="auth__button">{buttonName}</button>
                 {children}
             </form>

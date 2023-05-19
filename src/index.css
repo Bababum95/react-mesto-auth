@@ -3,6 +3,7 @@
 @import url(blocks/body/body.css);
 
 @import url(blocks/header/header.css);
+@import url(blocks/header/__placeholder/header__placeholder.css);
 @import url(blocks/header/__button-menu/header__button-menu.css);
 @import url(blocks/header/__wraper/header__wraper.css);
 @import url(blocks/header/__menu/header__menu.css);
@@ -56,3 +57,6 @@
 @import url(blocks/auth/__button/auth__button.css);
 @import url(blocks/auth/__input/auth__input.css);
 @import url(blocks/auth/__title/auth__title.css);
+
+@import url(blocks/preloader/preloader.css);
+@import url(blocks/preloader/__circle/preloader__circle.css);

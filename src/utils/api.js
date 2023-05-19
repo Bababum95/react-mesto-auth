@@ -11,70 +11,54 @@ class Api {
         return res.json();
     }
 
+    _request(endipoint, options) {
+        return fetch(`${this._baseUrl}/${endipoint}`, options).then(this._getResponseData)
+    }
+
     getInitialCards() {
-        return fetch(`${this._baseUrl}/cards`, { headers: this._token })
-            .then(res => {
-                return this._getResponseData(res)
-            })
+        return this._request('cards', { headers: this._token })
     }
 
     getUserInfo() {
-        return fetch(`${this._baseUrl}/users/me`, { headers: this._token })
-            .then(res => {
-                return this._getResponseData(res)
-            })
+        return this._request('users/me', { headers: this._token })
     }
 
     addCard(formData) {
-        return fetch(`${this._baseUrl}/cards`, {
+        return this._request('cards', {
             method: 'POST',
             headers: this._token,
             body: JSON.stringify(formData)
         })
-        .then(res => {
-            return this._getResponseData(res)
-        })
     }
 
     editUserInfo(formData) {
-        return fetch(`${this._baseUrl}/users/me`, {
+        return this._request('users/me', {
             method: 'PATCH',
             headers: this._token,
             body: JSON.stringify(formData)
-        })
-        .then(res => {
-            return this._getResponseData(res)
         })
     }
 
     deleteCard(cardId) {
-        return fetch(`${this._baseUrl}/cards/${cardId}`, {
+        return this._request(`cards/${cardId}`, {
             method: 'DELETE',
             headers: this._token,
-        })
-        .then(res => {
-            return this._getResponseData(res)
         })
     }
 
     togleLike(cardId, isLiked) {
-        this.method = isLiked? "PUT" : "DELETE" 
-        return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+        this.method = isLiked ? "PUT" : "DELETE"
+        return this._request(`cards/${cardId}/likes`, {
             method: this.method,
             headers: this._token,
         })
-        .then(res => {
-            return this._getResponseData(res)
-        })
     }
+
     changeAvatar(formData) {
-        return fetch(`${this._baseUrl}/users/me/avatar`, {
+        return this._request('users/me/avatar', {
             method: 'PATCH',
             headers: this._token,
             body: JSON.stringify(formData)
-        })
-        .then(res => {
-            return this._getResponseData(res)
         })
     }
 }
@@ -82,9 +66,9 @@ class Api {
 const api = new Api({
     baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-63',
     headers: {
-      authorization: '485da694-81b9-4feb-af69-7e62f449a2e4',
-      'Content-Type': 'application/json'
+        authorization: '485da694-81b9-4feb-af69-7e62f449a2e4',
+        'Content-Type': 'application/json'
     }
-  });
+});
 
-  export default api;
+export default api;

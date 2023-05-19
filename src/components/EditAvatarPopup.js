@@ -1,8 +1,8 @@
-import { createRef, useEffect } from 'react'
+import { useRef, useEffect } from 'react'
 import PopupWithForm from './PopupWithForm'
 
-function EditProfilePopup({ isOpen, onClose, onUpdateAvatar }) {
-    const avatarInput = createRef();
+function EditProfilePopup({ isOpen, onClose, onUpdateAvatar, isLoading }) {
+    const avatarInput = useRef();
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -16,7 +16,7 @@ function EditProfilePopup({ isOpen, onClose, onUpdateAvatar }) {
 
     return (
         <PopupWithForm name="change-avatar" title="Обновить аватар" button="Сохранить"
-            isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} >
+            isOpen={isOpen} onClose={onClose} onSubmit={handleSubmit} isLoading={isLoading} >
             <div className="popup__wraper">
                 <input type="url" name="avatar" required className="popup__item popup__link"
                     placeholder="Ссылка на картинку"

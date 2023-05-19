@@ -1,7 +1,18 @@
 const BASE_URL = 'https://auth.nomoreparties.co';
 
+const getResponseData = (res) => {
+    if (!res.ok) {
+        return Promise.reject(res.status);
+    }
+    return res.json();
+}
+
+const request = (endipoint, options) => {
+    return fetch(`${BASE_URL}/${endipoint}`, options).then(getResponseData)
+}
+
 export const register = (formData) => {
-    return fetch(`${BASE_URL}/signup`, {
+    return request('signup', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -10,7 +21,7 @@ export const register = (formData) => {
     })
 };
 export const authorize = (formData) => {
-    return fetch(`${BASE_URL}/signin`, {
+    return request('signin', {
         method: 'POST',
         headers: {
             "Content-Type": "application/json"
@@ -19,13 +30,11 @@ export const authorize = (formData) => {
     })
 };
 export const checkToken = (token) => {
-    return fetch(`${BASE_URL}/users/me`, {
+    return request('users/me', {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`
         }
     })
-        .then(res => res.json())
-        .catch(err => console.log(err))
 }

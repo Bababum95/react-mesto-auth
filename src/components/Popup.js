@@ -1,9 +1,22 @@
-function Popup({name, isOpen, onClose, container, children}) {
+import { useEffect } from "react";
+
+function Popup({ name, isOpen, onClose, container, children }) {
+    useEffect(() => {
+        if (!isOpen) return;
+        const closeByEscape = (e) => {
+            if (e.key === 'Escape') {
+                onClose();
+            }
+        }
+        document.addEventListener('keydown', closeByEscape)
+        return () => document.removeEventListener('keydown', closeByEscape)
+    }, [isOpen, onClose])
+    
     return (
         <div className={`popup popup_${name} ${isOpen && 'popup_opened'}`} onClick={onClose}>
             <div className={`popup__${container}`} onClick={e => e.stopPropagation()} >
                 <button type="button" className="popup__close" onClick={onClose}></button>
-                    {children}
+                {children}
             </div>
         </div>
     );

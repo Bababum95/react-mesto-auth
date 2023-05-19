@@ -20,13 +20,13 @@ function Main({ onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onC
         <button type="button" className="profile__add" onClick={onAddPlace}></button>
       </section>
       <section className="grid-zona">
-        {cards.map((card) => 
+        {cards.map((card) => (
           <Card key={card._id}
           cardData={card}
           onCardClick={onCardClick}
           onCardLike={onCardLike}
           onCardDelete={onCardDelete} />
-        )}
+        ))}
       </section>
     </main>
   );
