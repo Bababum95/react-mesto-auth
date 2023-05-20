@@ -1,9 +1,39 @@
-# Здесь будет ваш проект на Реакте с авторизацией и регистрацией
+# Project: Mesto React.js
 
-[pages](https://bababum95.github.io/react-mesto-auth/)
+This is a web application that enables users to manage their photos by adding, removing, and editing them, as well as liking other users' photos. It also provides the functionality to update user profiles by changing their avatar image, name, and description. 
 
-Используйте ваши предыдущие наработки по проекту Mesto. Это может быть работа 11-го спринта или его улучшенная версия после 2-х последних спринтов. 
+This project is built using React.js and includes some custom hooks and a Higher-Order Component. Additionally, it uses React Router for routing and navigation. Authentication also is implemented in this project. 
 
-Все запросы на авторизацию, регистрацию и проверку токена должны работать через сервис 
-`https://auth.nomoreparties.co`.
-Остальные запросы, не относящиеся к этой проектной работе могут быть к бэкенду из предыдущих спринтов.
+---
+
+### Technologies Used
+
+* React.js
+* React Router
+* JavaScript
+* CSS
+* OOP
+* Webpack
+* REST API
+
+---
+
+## Features
+
+The website provides various functionalities, including:
+* Adding and deleting user photos
+* Editing profile information, such as changing profile picture, name, and description
+* Liking the photographs of other users
+
+---
+
+## Usage
+
+The web page is available for viewing in any web browser.
+[Link to the **GitHub Pages**](https://bababum95.github.io/react-mesto-auth/) 
+
+---
+
+## Credits
+
+The project was completed as a part of the Yandex.Practicum curriculum.
